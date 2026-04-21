@@ -15,12 +15,32 @@ Route::get('blog', function () {
     return view('blog');
 });
 
+Route::get('pert1', function () {
+    return view('pert1');
+});
+
+Route::get('pert2', function () {
+    return view('pert2');
+});
+
+Route::get('pert3', function () {
+    return view('pert3');
+});
+
+Route::get('tgaspert3', function () {
+    return view('tugaspert3');
+});
+
+Route::get('pert4', function () {
+    return view('pert4');
+});
+
 Route::get('Pertemuan5', function () {
     return view('Pertemuan5');
 });
 
 Route::get('bju', function () {
-    return view('uniqlo');
+    return view('tugaspert5uniqlo');
 });
 
 
