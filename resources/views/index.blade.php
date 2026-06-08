@@ -1,41 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-	<title>Tutorial Membuat CRUD Pada Laravel - www.malasngoding.com</title>
+    <meta charset="UTF-8">
+    <title>Keranjang Belanja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="container mt-4">
 
-	<h2>www.malasngoding.com</h2>
-	<h3>Data Pegawai</h3>
+    <h2 class="mb-4">🛒 Keranjang Belanja</h2>
 
-	<a href="/pegawai/tambah"> + Tambah Pegawai Baru</a>
+    <a href="/tambah" class="btn btn-primary mb-3">+ Beli</a>
 
-	<br/>
-	<br/>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Kode Pembelian</th>
+                <th>Kode Barang</th>
+                <th>Jumlah Pembelian</th>
+                <th>Harga per Item</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($keranjang as $item)
+            <tr>
+                <td>{{ $item->ID }}</td>
+                <td>{{ $item->KodeBarang }}</td>
+                <td>{{ $item->Jumlah }}</td>
+                <td>Rp {{ number_format($item->Harga, 0, ',', '.') }}</td>
+                <td>Rp {{ number_format($item->Jumlah * $item->Harga, 0, ',', '.') }}</td>
+                <td>
+                    <a href="/tambah" class="btn btn-success btn-sm">Beli</a>
+                    <a href="/hapus/{{ $item->ID }}"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Yakin ingin membatalkan item ini?')">
+                        Batal
+                    </a>
+                </td>
+            </tr>
+            @endforeach
 
-	<table border="1">
-		<tr>
-			<th>Nama</th>
-			<th>Jabatan</th>
-			<th>Umur</th>
-			<th>Alamat</th>
-			<th>Opsi</th>
-		</tr>
-		@foreach($pegawai as $p)
-		<tr>
-			<td>{{ $p->pegawai_nama }}</td>
-			<td>{{ $p->pegawai_jabatan }}</td>
-			<td>{{ $p->pegawai_umur }}</td>
-			<td>{{ $p->pegawai_alamat }}</td>
-			<td>
-				<a href="/pegawai/edit/{{ $p->pegawai_id }}">Edit</a>
-				|
-				<a href="/pegawai/hapus/{{ $p->pegawai_id }}">Hapus</a>
-			</td>
-		</tr>
-		@endforeach
-	</table>
-
+            @if(count((array)$keranjang) == 0)
+            <tr>
+                <td colspan="6" class="text-center text-muted">Belum ada data</td>
+            </tr>
+            @endif
+        </tbody>
+    </table>
 
 </body>
 </html>
