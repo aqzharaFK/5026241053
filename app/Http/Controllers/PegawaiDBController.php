@@ -16,7 +16,7 @@ class PegawaiDBController extends Controller
         $pegawai = DB::table('pegawai')->paginate(10);
 
     	// mengirim data pegawai ke view index
-    	return view('index',['pegawai' => $pegawai]);
+    	return view('index_pegawai',['pegawai' => $pegawai]);
 
     }
 
@@ -29,7 +29,7 @@ class PegawaiDBController extends Controller
 		$pegawai = DB::table('pegawai')->where('pegawai_nama','like',"%".$cari."%")->paginate();
 
     		// mengirim data pegawai ke view index
-		return view('index',['pegawai' => $pegawai]);
+		return view('index_pegawai',['pegawai' => $pegawai]);
 
 	}
     public function tambah()
